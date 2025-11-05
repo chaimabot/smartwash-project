@@ -1,0 +1,9 @@
+# Visual Studio
+backend/.vs/
+
+# Node modules
+frontend-web/node_modules/
+mobile-app/node_modules/
+
+# Fichiers sensibles
+.env
