@@ -1,55 +1,77 @@
 {
-  "name": "@coreui/coreui-free-react-admin-template",
-  "version": "5.5.0",
-  "description": "CoreUI Free React Admin Template",
-  "homepage": ".",
-  "bugs": {
-    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
-  },
+  "name": "argon-dashboard-react",
+  "version": "1.2.4",
+  "description": "React version of Argon Dashboard by Creative Tim",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
+    "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
   },
+  "keywords": [
+    "react",
+    "reactjs",
+    "argon",
+    "argon-react",
+    "dashboard",
+    "dashboard-react",
+    "argon-dashboard",
+    "argon-dashboard-react"
+  ],
+  "author": "Creative Tim",
   "license": "MIT",
-  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
-  "scripts": {
-    "build": "vite build",
-    "lint": "eslint",
-    "serve": "vite preview",
-    "start": "vite"
+  "bugs": {
+    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
+  "homepage": "https://demos.creative-tim.com/argon-dashboard-react/",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "cross-env PUBLIC_URL=/ react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile:scss": "sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
+    "minify:scss": "sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --style compressed",
+    "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "dependencies": {
-    "@coreui/chartjs": "^4.1.0",
-    "@coreui/coreui": "^5.4.3",
-    "@coreui/icons": "^3.0.1",
-    "@coreui/icons-react": "^2.3.0",
-    "@coreui/react": "^5.9.1",
-    "@coreui/react-chartjs": "^3.0.0",
-    "@coreui/utils": "^2.0.2",
-    "@popperjs/core": "^2.11.8",
-    "chart.js": "^4.5.1",
-    "classnames": "^2.5.1",
-    "core-js": "^3.46.0",
-    "prop-types": "^15.8.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-redux": "^9.2.0",
-    "react-router-dom": "^7.9.5",
-    "redux": "5.0.1",
-    "simplebar-react": "^3.3.2"
+    "@fortawesome/fontawesome-free": "6.5.1",
+    "ajv": "^8.16.0",
+    "bootstrap": "4.6.2",
+    "chart.js": "2.9.4",
+    "classnames": "2.3.2",
+    "moment": "2.29.4",
+    "nouislider": "15.4.0",
+    "react": "18.2.0",
+    "react-chartjs-2": "2.11.2",
+    "react-copy-to-clipboard": "5.1.0",
+    "react-datetime": "3.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.21.1",
+    "react-scripts": "5.0.1",
+    "reactstrap": "8.10.0",
+    "sass": "1.69.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.0",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9.38.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "globals": "^16.4.0",
-    "postcss": "^8.5.6",
-    "prettier": "3.6.2",
-    "sass": "^1.93.2",
-    "vite": "^7.1.12"
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.9",
+    "cross-env": "^7.0.3"
+  },
+  "optionalDependencies": {
+    "eslint-plugin-flowtype": "8.0.3",
+    "typescript": "5.3.3"
+  },
+  "overrides": {
+    "svgo": "3.0.2",
+    "fsevents": "2.3.2",
+    "chokidar": "3.5.3"
   }
 }

@@ -1,242 +1,249 @@
-# CoreUI Free React Admin Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=CoreUI%20-%20Free%React%204%20Admin%20Template%20&url=https://coreui.io&hashtags=bootstrap,admin,template,dashboard,panel,free,angular,react,vue)
+# [Argon Dashboard React](https://demos.creative-tim.com/argon-dashboard-react?ref=adr-github-readme) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Argon%20Dashboard%20is%20a%20Free%20Bootstrap%204,%20React%20and%20Reactstrap%20Dashboard%20made%20using%20create-react-app%20%E2%9D%A4%EF%B8%8F%0Ahttps%3A//demos.creative-tim.com/argon-dashboard-react%20%23react%20%23reactstrap%20%23createreactapp%20%23argon%20%23argondesign%20%23reactdashboard%20%23argonreact%20%23reactdesign%20%23bootstrap%20%23material%20%23design%20%23uikit%20%23freebie%20%20via%20%40CreativeTim)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![@coreui coreui](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
-[![npm package][npm-coreui-badge]][npm-coreui]
-[![NPM downloads][npm-coreui-download]][npm-coreui]
-[![@coreui react](https://img.shields.io/badge/@coreui%20-react-lightgrey.svg?style=flat-square)](https://github.com/coreui/react)
-[![npm package][npm-coreui-react-badge]][npm-coreui-react]
-[![NPM downloads][npm-coreui-react-download]][npm-coreui-react]  
+![version](https://img.shields.io/badge/version-1.2.4-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/argon-dashboard-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/argon-dashboard-react/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/argon-dashboard-react.svg?maxAge=2592000)](https://github.com/creativetimofficial/argon-dashboard-react/issues?q=is%3Aissue+is%3Aclosed) [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim-general/Lobby) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
 
-[npm-coreui]: https://www.npmjs.com/package/@coreui/coreui
-[npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
-[npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square
-[npm-coreui-react]: https://www.npmjs.com/package/@coreui/react
-[npm-coreui-react-badge]: https://img.shields.io/npm/v/@coreui/react.png?style=flat-square
-[npm-coreui-react-download]: https://img.shields.io/npm/dm/@coreui/react.svg?style=flat-square
-[npm]: https://www.npmjs.com/package/@coreui/react
+![Product Gif](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-react/argon-dashboard-react.gif)
 
-[![Bootstrap Admin Template](https://assets.coreui.io/products/coreui-free-bootstrap-admin-template-light-dark.webp)](https://coreui.io/product/free-react-admin-template/)
+Start your development with a Dashboard for [Bootstrap 4](https://getbootstrap.com/?ref=creativetim), [React](https://reactjs.org/?ref=creativetim) and [Reactstrap](https://reactstrap.github.io/?ref=creativetim), made with [create-react-app](https://facebook.github.io/create-react-app/?ref=creativetim). It is open source, free and it features many components that can help you create amazing websites.
 
-CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
+**Fully Coded Components**
+
+Argon Dashboard React is built with over 100 individual components, giving you the freedom of choosing and combining. All components can take variations in color, that you can easily modify using SASS files.
+You will save a lot of time going from prototyping to full-functional code, because all elements are implemented. This Dashboard is coming with pre-built examples, so the development process is seamless, switching from our pages to the real website is very easy to be done.
+Every element has multiple states for colors, styles, hover, focus, that you can easily access and use.
+
+**Complex Documentation**
+
+Each element is well presented in a very complex documentation. You can read more about the idea behind this [dashboard here](https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=creativetim). You can check the [components here](https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=creativetim) and the [foundation here](https://demos.creative-tim.com/argon-dashboard/#/documentation/colors?ref=creativetim).
+
+**Example Pages**
+
+If you want to get inspiration or just show something directly to your clients, you can jump start your development with our pre-built example pages. You will be able to quickly set up the basic structure for your web project.
 
 ## Table of Contents
 
-* [Versions](#versions)
-* [CoreUI PRO](#coreui-pro)
-* [CoreUI PRO React Admin Templates](#coreui-pro-react-admin-templates)
-* [Quick Start](#quick-start)
-* [Installation](#installation)
-* [Basic usage](#basic-usage)
-* [What's included](#whats-included)
-* [Documentation](#documentation)
-* [Components](#components)
-* [Versioning](#versioning)
-* [Creators](#creators)
-* [Community](#community)
-* [Support CoreUI Development](#support-coreui-development)
-* [Copyright and License](#copyright-and-license)
+- [Versions](#versions)
+- [Demo](#demo)
+- [Quick Start](#quick-start)
+- [Deploy](#deploy)
+- [Documentation](#documentation)
+- [File Structure](#file-structure)
+- [Browser Support](#browser-support)
+- [Resources](#resources)
+- [Reporting Issues](#reporting-issues)
+- [Licensing](#licensing)
+- [Useful Links](#useful-links)
 
 ## Versions
 
-* [CoreUI Free Bootstrap Admin Template](https://github.com/coreui/coreui-free-bootstrap-admin-template)
-* [CoreUI Free Angular Admin Template](https://github.com/coreui/coreui-free-angular-admin-template)
-* [CoreUI Free React.js Admin Template (Vite)](https://github.com/coreui/coreui-free-react-admin-template)
-* [CoreUI Free React.js Admin Template (Create React App)](https://github.com/coreui/coreui-free-react-admin-template-cra)
-* [CoreUI Free Vue.js Admin Template](https://github.com/coreui/coreui-free-vue-admin-template)
+[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/html-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-dashboard?ref=adr-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-dashboard-react?ref=adr-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/angular-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-dashboard-angular)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/nodejs-logo.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/argon-dashboard-nodejs?ref=adr-github-readme)[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/laravel_logo.png" width="60" height="60" style="background:white"/>](https://www.creative-tim.com/product/argon-dashboard-laravel?ref=adr-github-readme)[<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/sketch-logo.jpg" width="60" height="60" />](https://www.creative-tim.com/product/argon-dashboard-react?ref=adr-github-readme)
 
-## CoreUI PRO
+| HTML                                                                                                                                                                                           | React                                                                                                                                                                                                             | Angular                                                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Argon Dashboard HTML](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard/argon-dashboard.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard) | [![Argon Dashboard React](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/argon-dashboard-react.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-react) | [![Argon Dashboard Angular](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-angular/argon-dashboard-angular.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-angular) |
 
-* 💪  [CoreUI PRO Angular Admin Template](https://coreui.io/product/angular-dashboard-template/)
-* 💪  [CoreUI PRO Bootstrap Admin Template](https://coreui.io/product/bootstrap-dashboard-template/)
-* 💪  [CoreUI PRO Next.js Admin Template](https://coreui.io/product/next-js-dashboard-template/)
-* 💪  [CoreUI PRO React Admin Template](https://coreui.io/product/react-dashboard-template/)
-* 💪  [CoreUI PRO Vue Admin Template](https://coreui.io/product/vue-dashboard-template/)
+| NodeJS                                                                                                                                                                                                                | Laravel                                                                                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Argon Dashboard NodeJS](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-nodejs/argon-dashboard-nodejs.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-nodejs) | [![Argon Dashboard Laravel](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-laravel/argon-dashboard-laravel.jpg?raw=true)](https://www.creative-tim.com/product/argon-dashboard-laravel) |
 
-## CoreUI PRO React Admin Templates
+## Demo
 
-| Default Theme | Light Theme |
-| --- | --- |
-| [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_default_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=default) | [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_light_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=light)|
+| Dashboard Page                                                                                                                                                                                              | Icons Page                                                                                                                                                                                          | Tables Page                                                                                                                                                                                            | Maps Page                                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [![Dashboard Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/dashboard-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/admin/index) | [![Icons Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/icons-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/admin/icons) | [![Tables Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/tables-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/admin/tables) | [![Maps Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/maps-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/admin/maps) |
 
-| Modern Theme | Bright Theme |
-| --- | --- |
-| [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_default_v3_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=modern) | [![CoreUI PRO React Admin Template](https://coreui.io/images/templates/coreui_pro_light_v3_light_dark.webp)](https://coreui.io/product/react-dashboard-template/?theme=bright)|
+| Register Page                                                                                                                                                                                             | Login Page Page                                                                                                                                                                                         | Profile Page                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Login Page](https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-react/register-page.png)](https://demos.creative-tim.com/argon-dashboard-react/#/auth/register) | [![Login Page Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/login-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/auth/login) | [![Profile Page](https://github.com/creativetimofficial/public-assets/blob/master/argon-dashboard-react/user-page.png?raw=true)](https://demos.creative-tim.com/argon-dashboard-react/#/admin/user-profile) |
 
-## Quick Start
+[View More](https://demos.creative-tim.com/argon-dashboard-react?ref=adr-github-readme)
 
-- [Download the latest release](https://github.com/coreui/coreui-free-react-admin-template/archive/refs/heads/main.zip)
-- Clone the repo: `git clone https://github.com/coreui/coreui-free-react-admin-template.git`
+## Quick start
 
-### Installation
+- `npm i argon-dashboard-react`
+- [Download from Github](https://github.com/creativetimofficial/argon-dashboard-react/archive/master.zip).
+- [Download from Creative Tim](https://www.creative-tim.com/product/argon-dashboard-react?ref=adr-github-readme).
+- Install with [Bower](https://bower.io/?ref=creativetim): `bower install argon-dashboard-react`.
+- Clone the repo: `git clone https://github.com/creativetimofficial/argon-dashboard-react.git`.
 
-``` bash
-$ npm install
-```
+## Deploy
 
-or
+:rocket: You can deploy your own version of the template to Genezio with one click:
 
-``` bash
-$ yarn install
-```
+[![Deploy to Genezio](https://raw.githubusercontent.com/Genez-io/graphics/main/svg/deploy-button.svg)](https://app.genez.io/start/deploy?repository=https://github.com/creativetimofficial/argon-dashboard-react&utm_source=github&utm_medium=referral&utm_campaign=github-creativetim&utm_term=deploy-project&utm_content=button-head)
 
-### Basic usage
-
-``` bash
-# dev server with hot reload at http://localhost:3000
-$ npm start 
-```
-
-or 
-
-``` bash
-# dev server with hot reload at http://localhost:3000
-$ yarn start
-```
-
-Navigate to [http://localhost:3000](http://localhost:3000). The app will automatically reload if you change any of the source files.
-
-#### Build
-
-Run `build` to build the project. The build artifacts will be stored in the `build/` directory.
-
-```bash
-# build for production with minification
-$ npm run build
-```
-
-or
-
-```bash
-# build for production with minification
-$ yarn build
-```
-
-## What's included
-
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
-
-```
-coreui-free-react-admin-template
-├── public/          # static files
-│   ├── favicon.ico
-│   └── manifest.json
-│
-├── src/             # project root
-│   ├── assets/      # images, icons, etc.
-│   ├── components/  # common components - header, footer, sidebar, etc.
-│   ├── layouts/     # layout containers
-│   ├── scss/        # scss styles
-│   ├── views/       # application views
-│   ├── _nav.js      # sidebar navigation config
-│   ├── App.js
-│   ├── index.js
-│   ├── routes.js    # routes config
-│   └── store.js     # template state example 
-│
-├── index.html       # html template
-├── ...
-├── package.json
-├── ...
-└── vite.config.mjs  # vite config
-```
 
 ## Documentation
 
-The documentation for the CoreUI Admin Template is hosted at our website [CoreUI for React](https://coreui.io/react/docs/templates/installation/)
+The documentation for the Material Kit is hosted at our [website](https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview).
 
-## Components
+## File Structure
 
-CoreUI React.js Admin Templates are built on top of CoreUI and CoreUI PRO UI components libraries, including all of these components.
+Within the download you'll find the following directories and files:
 
-- [React Accordion](https://coreui.io/react/docs/components/accordion/)
-- [React Alert](https://coreui.io/react/docs/components/alert/)
-- [React Autocomplete](https://coreui.io/react/docs/forms/autocomplete/) **PRO**
-- [React Avatar](https://coreui.io/react/docs/components/avatar/)
-- [React Badge](https://coreui.io/react/docs/components/badge/)
-- [React Breadcrumb](https://coreui.io/react/docs/components/breadcrumb/)
-- [React Button](https://coreui.io/react/docs/components/button/)
-- [React Button Group](https://coreui.io/react/docs/components/button-group/)
-- [React Callout](https://coreui.io/react/docs/components/callout/)
-- [React Card](https://coreui.io/react/docs/components/card/)
-- [React Carousel](https://coreui.io/react/docs/components/carousel/)
-- [React Checkbox](https://coreui.io/react/docs/forms/checkbox/)
-- [React Close Button](https://coreui.io/react/docs/components/close-button/)
-- [React Collapse](https://coreui.io/react/docs/components/collapse/)
-- [React Date Picker](https://coreui.io/react/docs/forms/date-picker/) **PRO**
-- [React Date Range Picker](https://coreui.io/react/docs/forms/date-range-picker/) **PRO**
-- [React Dropdown](https://coreui.io/react/docs/components/dropdown/)
-- [React Floating Labels](https://coreui.io/react/docs/forms/floating-labels/)
-- [React Footer](https://coreui.io/react/docs/components/footer/)
-- [React Header](https://coreui.io/react/docs/components/header/)
-- [React Image](https://coreui.io/react/docs/components/image/)
-- [React Input](https://coreui.io/react/docs/forms/input/)
-- [React Input Group](https://coreui.io/react/docs/forms/input-group/)
-- [React List Group](https://coreui.io/react/docs/components/list-group/)
-- [React Loading Button](https://coreui.io/react/docs/components/loading-button/) **PRO**
-- [React Modal](https://coreui.io/react/docs/components/modal/)
-- [React Multi Select](https://coreui.io/react/docs/forms/multi-select/) **PRO**
-- [React Navs & Tabs](https://coreui.io/react/docs/components/navs-tabs/)
-- [React Navbar](https://coreui.io/react/docs/components/navbar/)
-- [React Offcanvas](https://coreui.io/react/docs/components/offcanvas/)
-- [React Pagination](https://coreui.io/react/docs/components/pagination/)
-- [React Password Input](https://coreui.io/react/docs/forms/password-input/) **PRO**
-- [React Placeholder](https://coreui.io/react/docs/components/placeholder/)
-- [React Popover](https://coreui.io/react/docs/components/popover/)
-- [React Progress](https://coreui.io/react/docs/components/progress/)
-- [React Radio](https://coreui.io/react/docs/forms/radio/)
-- [React Range](https://coreui.io/react/docs/forms/range/)
-- [React Range Slider](https://coreui.io/react/docs/forms/range-slider/) **PRO**
-- [React Rating](https://coreui.io/react/docs/forms/rating/)
-- [React Select](https://coreui.io/react/docs/forms/select/)
-- [React Sidebar](https://coreui.io/react/docs/components/sidebar/)
-- [React Smart Pagination](https://coreui.io/react/docs/components/smart-pagination/) **PRO**
-- [React Smart Table](https://coreui.io/react/docs/components/smart-table/) **PRO**
-- [React Spinner](https://coreui.io/react/docs/components/spinner/)
-- [React Stepper](https://coreui.io/react/docs/forms/stepper/) **PRO**
-- [React Switch](https://coreui.io/react/docs/forms/switch/)
-- [React Table](https://coreui.io/react/docs/components/table/)
-- [React Textarea](https://coreui.io/react/docs/forms/textarea/)
-- [React Time Picker](https://coreui.io/react/docs/forms/time-picker/) **PRO**
-- [React Toast](https://coreui.io/react/docs/components/toast/)
-- [React Tooltip](https://coreui.io/react/docs/components/tooltip/)
+```
+Argon Dashboard React
+.
+├── Documentation
+│   └── documentation.html
+├── CHANGELOG.md
+├── ISSUE_TEMPLATE.md
+├── LICENSE
+├── README.md
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+└── src
+    ├── assets
+    │   ├── css
+    │   │   ├── argon-dashboard-react.css
+    │   │   ├── argon-dashboard-react.css.map
+    │   │   └── argon-dashboard-react.min.css
+    │   ├── fonts
+    │   │   └── nucleo
+    │   ├── img
+    │   │   ├── brand
+    │   │   ├── icons
+    │   │   │   └── common
+    │   │   └── theme
+    │   ├── scss
+    │   │   ├── argon-dashboard-react.scss
+    │   │   ├── bootstrap
+    │   │   │   ├── mixins
+    │   │   │   └── utilities
+    │   │   ├── core
+    │   │   │   ├── alerts
+    │   │   │   ├── avatars
+    │   │   │   ├── badges
+    │   │   │   ├── buttons
+    │   │   │   ├── cards
+    │   │   │   ├── charts
+    │   │   │   ├── close
+    │   │   │   ├── custom-forms
+    │   │   │   ├── dropdowns
+    │   │   │   ├── footers
+    │   │   │   ├── forms
+    │   │   │   ├── headers
+    │   │   │   ├── icons
+    │   │   │   ├── list-groups
+    │   │   │   ├── maps
+    │   │   │   ├── masks
+    │   │   │   ├── mixins
+    │   │   │   ├── modals
+    │   │   │   ├── navbars
+    │   │   │   ├── navs
+    │   │   │   ├── paginations
+    │   │   │   ├── popovers
+    │   │   │   ├── progresses
+    │   │   │   ├── separators
+    │   │   │   ├── tables
+    │   │   │   ├── type
+    │   │   │   ├── utilities
+    │   │   │   └── vendors
+    │   │   ├── custom
+    │   │   └── react
+    │   └── vendor
+    │       ├── @fortawesome
+    │       │   └── fontawesome-free
+    │       │       ├── LICENSE.txt
+    │       │       ├── css
+    │       │       ├── js
+    │       │       ├── less
+    │       │       ├── scss
+    │       │       ├── sprites
+    │       │       ├── svgs
+    │       │       │   ├── brands
+    │       │       │   ├── regular
+    │       │       │   └── solid
+    │       │       └── webfonts
+    │       └── nucleo
+    │           ├── css
+    │           └── fonts
+    ├── components
+    │   ├── Footers
+    │   │   ├── AdminFooter.jsx
+    │   │   └── AuthFooter.jsx
+    │   ├── Headers
+    │   │   ├── Header.jsx
+    │   │   └── UserHeader.jsx
+    │   ├── Navbars
+    │   │   ├── AdminNavbar.jsx
+    │   │   └── AuthNavbar.jsx
+    │   └── Sidebar
+    │       └── Sidebar.jsx
+    ├── index.js
+    ├── layouts
+    │   ├── Admin.jsx
+    │   └── Auth.jsx
+    ├── routes.js
+    ├── variables
+    │   └── charts.jsx
+    └── views
+        ├── Index.jsx
+        └── examples
+            ├── Icons.jsx
+            ├── Login.jsx
+            ├── Maps.jsx
+            ├── Profile.jsx
+            ├── Register.jsx
+            └── Tables.jsx
+```
 
-## Versioning
+## Browser Support
 
-For transparency into our release cycle and in striving to maintain backward compatibility, CoreUI Free Admin Template is maintained under [the Semantic Versioning guidelines](http://semver.org/).
+At present, we officially aim to support the last two versions of the following browsers:
 
-See [the Releases section of our project](https://github.com/coreui/coreui-free-react-admin-template/releases) for changelogs for each release version.
+<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/chrome-logo.png?raw=true" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/firefox-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/edge-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/safari-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/opera-logo.png" width="64" height="64">
 
-## Creators
+## Resources
 
-**Łukasz Holeczek**
+- Demo: <https://demos.creative-tim.com/argon-dashboard-react/#/admin/index?ref=adr-github-readme>
+- Download Page: <https://www.creative-tim.com/product/argon-dashboard-react?ref=adr-github-readme>
+- Documentation: <https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-github-readme>
+- License Agreement: <https://www.creative-tim.com/license?ref=adr-github-readme>
+- Support: <https://www.creative-tim.com/contact-us?ref=adr-github-readme>
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/argon-dashboard-react/issues?ref=creativetim)
+- **Kit:**
 
-* <https://twitter.com/lukaszholeczek>
-* <https://github.com/mrholek>
+| HTML                                                                                                                                                                                                            | Vue                                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Argon Design System  HTML](https://github.com/creativetimofficial/public-assets/blob/master/argon-design-system/argon-design-system.jpg?raw=true)](https://www.creative-tim.com/product/argon-design-system) | [![Vue Argon Design System](https://github.com/creativetimofficial/public-assets/blob/master/vue-argon-design-system/vue-argon-design-system.jpg?raw=true)](https://www.creative-tim.com/product/vue-argon-design-system) |
 
-**Andrzej Kopański**
+## Reporting Issues
 
-* <https://github.com/xidedix>
+We use GitHub Issues as the official bug tracker for the Material Kit. Here are some advices for our users that want to report an issue:
 
-**CoreUI Team**
+1. Make sure that you are using the latest version of the Material Kit. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/?ref=adr-github-readme).
+2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
+3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
-* <https://twitter.com/core_ui>
-* <https://github.com/coreui>
-* <https://github.com/orgs/coreui/people>
+## Licensing
 
-## Community
+- Copyright 2024 Creative Tim (https://www.creative-tim.com/?ref=adr-github-readme)
 
-Get updates on CoreUI's development and chat with the project maintainers and community members.
+- Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md?ref=creativetim)
 
-- Follow [@core_ui on Twitter](https://twitter.com/core_ui).
-- Read and subscribe to [CoreUI Blog](https://coreui.ui/blog/).
+## Useful Links
 
-## Support CoreUI Development
+- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w?ref=creativetim)
+- [Affiliate Program](https://www.creative-tim.com/affiliates/new?ref=adr-github-readme) (earn money)
+- [Blog Creative Tim](http://blog.creative-tim.com/?ref=adr-github-readme)
+- [Free Products](https://www.creative-tim.com/bootstrap-themes/free?ref=adr-github-readme) from Creative Tim
+- [Premium Products](https://www.creative-tim.com/bootstrap-themes/premium?ref=adr-github-readme) from Creative Tim
+- [React Products](https://www.creative-tim.com/bootstrap-themes/react-themes?ref=adr-github-readme) from Creative Tim
+- [Angular Products](https://www.creative-tim.com/bootstrap-themes/angular-themes?ref=adr-github-readme) from Creative Tim
+- [VueJS Products](https://www.creative-tim.com/bootstrap-themes/vuejs-themes?ref=adr-github-readme) from Creative Tim
+- [More products](https://www.creative-tim.com/bootstrap-themes?ref=adr-github-readme) from Creative Tim
+- Check our Bundles [here](https://www.creative-tim.com/bundles?ref=adr-github-readme)
 
-CoreUI is an MIT-licensed open source project and is completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing. You can support development by buying the [CoreUI PRO](https://coreui.io/pricing/?framework=react&src=github-coreui-free-react-admin-template) or by becoming a sponsor via [Open Collective](https://opencollective.com/coreui/).
+### Social Media
 
-## Copyright and License
+Twitter: <https://twitter.com/CreativeTim?ref=creativetim>
 
-copyright 2025 creativeLabs Łukasz Holeczek.   
+Facebook: <https://www.facebook.com/CreativeTim?ref=creativetim>
 
-Code released under [the MIT license](https://github.com/coreui/coreui-free-react-admin-template/blob/main/LICENSE).
+Dribbble: <https://dribbble.com/creativetim?ref=creativetim>
+
+Instagram: <https://www.instagram.com/CreativeTimOfficial?ref=creativetim>
