@@ -1,6 +1,6 @@
 /*!
 =========================================================
-* Notifications Page
+* SmartWash Admin - Notifications Page
 =========================================================
 */
 
@@ -19,21 +19,37 @@ import {
 import Header from "components/Headers/Header.js";
 
 const Notifications = () => {
-  // Fake notifications (use backend data later)
+  // Fake notifications --- replace with API later
   const [notifications, setNotifications] = useState([
-    { id: 1, title: "New booking created", date: "2025-11-06", read: false },
-    { id: 2, title: "Payment received", date: "2025-11-06", read: false },
-    { id: 3, title: "System update completed", date: "2025-11-05", read: true },
+    {
+      id: 1,
+      title: "New wash booking received",
+      details: "Client: Adam (Machine M04 - Express)",
+      date: "2025-11-06",
+      read: false,
+    },
+    {
+      id: 2,
+      title: "Payment confirmed",
+      details: "Client: Sarah — 12.500 TND",
+      date: "2025-11-06",
+      read: false,
+    },
+    {
+      id: 3,
+      title: "Machine M02 finished the wash cycle",
+      details: "Ready to unload — Waiting for delivery",
+      date: "2025-11-05",
+      read: true,
+    },
   ]);
 
-  // ✅ Mark one notification as read
   const markAsRead = (id) => {
     setNotifications(
       notifications.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
   };
 
-  // ✅ Mark all notifications as read
   const markAllAsRead = () => {
     setNotifications(notifications.map((n) => ({ ...n, read: true })));
   };
@@ -42,13 +58,14 @@ const Notifications = () => {
     <>
       <Header />
 
-      {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0 d-flex justify-content-between align-items-center">
-                <h3 className="mb-0">Notifications</h3>
+                <h3 className="mb-0">SmartWash Notifications</h3>
+
+                {/* ✅ Button Mark All */}
                 <Button color="primary" size="sm" onClick={markAllAsRead}>
                   Mark all as read
                 </Button>
@@ -58,6 +75,7 @@ const Notifications = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Message</th>
+                    <th scope="col">Details</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
                     <th scope="col" className="text-right">
@@ -65,11 +83,15 @@ const Notifications = () => {
                     </th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {notifications.map((notif) => (
                     <tr key={notif.id}>
                       <th scope="row">{notif.title}</th>
+                      <td>{notif.details}</td>
                       <td>{notif.date}</td>
+
+                      {/* ✅ New / Read badge */}
                       <td>
                         {notif.read ? (
                           <Badge color="success" className="badge-dot">
@@ -81,6 +103,8 @@ const Notifications = () => {
                           </Badge>
                         )}
                       </td>
+
+                      {/* ✅ Mark one notification */}
                       <td className="text-right">
                         {!notif.read && (
                           <Button
@@ -97,7 +121,7 @@ const Notifications = () => {
                 </tbody>
               </Table>
 
-              <CardFooter></CardFooter>
+              <CardFooter />
             </Card>
           </div>
         </Row>
