@@ -1,3 +1,6 @@
+// ✅ SmartWash Admin Dashboard - Updated for business metrics
+// Replace your current Index.js page with this one
+
 import { useState } from "react";
 import classnames from "classnames";
 import Chart from "chart.js";
@@ -17,44 +20,43 @@ import {
   Col,
 } from "reactstrap";
 
-// core components
+// SmartWash Charts
 import {
   chartOptions,
   parseOptions,
-  chartExample1,
-  chartExample2,
-} from "variables/charts.js";
+  smartWashChart_Revenue,
+  smartWashChart_Orders,
+} from "variables/smartwashCharts.js";
 
 import Header from "components/Headers/Header.js";
 
-const Index = (props) => {
+const Index = () => {
   const [activeNav, setActiveNav] = useState(1);
-  const [chartExample1Data, setChartExample1Data] = useState("data1");
+  const [chartSelectedData, setChartSelectedData] = useState("month");
 
-  if (window.Chart) {
-    parseOptions(Chart, chartOptions());
-  }
+  if (window.Chart) parseOptions(Chart, chartOptions());
 
   const toggleNavs = (e, index) => {
     e.preventDefault();
     setActiveNav(index);
-    setChartExample1Data("data" + index);
+    setChartSelectedData(index === 1 ? "month" : "week");
   };
+
   return (
     <>
       <Header />
-      {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
-          <Col className="mb-5 mb-xl-0" xl="8">
+          {/* 🚗 Revenue Chart */}
+          <Col xl="8">
             <Card className="bg-gradient-default shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Overview
+                      SmartWash Overview
                     </h6>
-                    <h2 className="text-white mb-0">Sales value</h2>
+                    <h2 className="text-white mb-0">Monthly Revenue</h2>
                   </div>
                   <div className="col">
                     <Nav className="justify-content-end" pills>
@@ -63,11 +65,10 @@ const Index = (props) => {
                           className={classnames("py-2 px-3", {
                             active: activeNav === 1,
                           })}
-                          href="#pablo"
+                          href="#"
                           onClick={(e) => toggleNavs(e, 1)}
                         >
-                          <span className="d-none d-md-block">Month</span>
-                          <span className="d-md-none">M</span>
+                          <span>Month</span>
                         </NavLink>
                       </NavItem>
                       <NavItem>
@@ -75,12 +76,10 @@ const Index = (props) => {
                           className={classnames("py-2 px-3", {
                             active: activeNav === 2,
                           })}
-                          data-toggle="tab"
-                          href="#pablo"
+                          href="#"
                           onClick={(e) => toggleNavs(e, 2)}
                         >
-                          <span className="d-none d-md-block">Week</span>
-                          <span className="d-md-none">W</span>
+                          <span>Week</span>
                         </NavLink>
                       </NavItem>
                     </Nav>
@@ -88,146 +87,104 @@ const Index = (props) => {
                 </Row>
               </CardHeader>
               <CardBody>
-                {/* Chart */}
                 <div className="chart">
                   <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
+                    data={smartWashChart_Revenue[chartSelectedData]}
+                    options={smartWashChart_Revenue.options}
                   />
                 </div>
               </CardBody>
             </Card>
           </Col>
+
+          {/* 📊 Orders Chart */}
           <Col xl="4">
             <Card className="shadow">
-              <CardHeader className="bg-transparent">
-                <Row className="align-items-center">
-                  <div className="col">
-                    <h6 className="text-uppercase text-muted ls-1 mb-1">
-                      Performance
-                    </h6>
-                    <h2 className="mb-0">Total orders</h2>
-                  </div>
-                </Row>
+              <CardHeader>
+                <h6 className="text-muted ls-1 mb-1">Machines Usage</h6>
+                <h2>Number of wash cycles</h2>
               </CardHeader>
               <CardBody>
-                {/* Chart */}
                 <div className="chart">
                   <Bar
-                    data={chartExample2.data}
-                    options={chartExample2.options}
+                    data={smartWashChart_Orders.data}
+                    options={smartWashChart_Orders.options}
                   />
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
+
+        {/* 📋 Latest Reservations */}
         <Row className="mt-5">
-          <Col className="mb-5 mb-xl-0" xl="8">
+          <Col xl="8">
             <Card className="shadow">
-              <CardHeader className="border-0">
-                <Row className="align-items-center">
-                  <div className="col">
-                    <h3 className="mb-0">Page visits</h3>
-                  </div>
-                  <div className="col text-right">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      See all
-                    </Button>
-                  </div>
-                </Row>
+              <CardHeader className="border-0 d-flex justify-content-between">
+                <h3 className="mb-0">Latest Reservations</h3>
+                <Button size="sm" color="primary">
+                  See details
+                </Button>
               </CardHeader>
-              <Table className="align-items-center table-flush" responsive>
+              <Table className="table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Page name</th>
-                    <th scope="col">Visitors</th>
-                    <th scope="col">Unique users</th>
-                    <th scope="col">Bounce rate</th>
+                    <th>Client</th>
+                    <th>Selected Machine</th>
+                    <th>Status</th>
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">/argon/</th>
-                    <td>4,569</td>
-                    <td>340</td>
+                    <td>Aya ben hmida</td>
+                    <td>Machine 05</td>
                     <td>
-                      <i className="fas fa-arrow-up text-success mr-3" /> 46,53%
+                      <i className="fas fa-check text-success"></i> Completed
                     </td>
+                    <td>05 Nov 2025</td>
                   </tr>
                   <tr>
-                    <th scope="row">/argon/index.html</th>
-                    <td>3,985</td>
-                    <td>319</td>
+                    <td>Client Test</td>
+                    <td>Machine 03</td>
                     <td>
-                      <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                      46,53%
+                      <i className="fas fa-spinner text-warning"></i> In
+                      Progress
                     </td>
+                    <td>06 Nov 2025</td>
                   </tr>
                 </tbody>
               </Table>
             </Card>
           </Col>
+
+          {/* 🔋 Machine Status */}
           <Col xl="4">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <Row className="align-items-center">
-                  <div className="col">
-                    <h3 className="mb-0">Social traffic</h3>
-                  </div>
-                  <div className="col text-right">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      See all
-                    </Button>
-                  </div>
-                </Row>
+                <h3 className="mb-0">Machine Load</h3>
               </CardHeader>
-              <Table className="align-items-center table-flush" responsive>
+              <Table responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Referral</th>
-                    <th scope="col">Visitors</th>
-                    <th scope="col" />
+                    <th>Machine</th>
+                    <th>Usage</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">Google</th>
-                    <td>4,807</td>
+                    <td>Machine 01</td>
+                    <td>90%</td>
                     <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2">80%</span>
-                        <div>
-                          <Progress max="100" value="80" />
-                        </div>
-                      </div>
+                      <Progress value="90" />
                     </td>
                   </tr>
                   <tr>
-                    <th scope="row">Instagram</th>
-                    <td>3,678</td>
+                    <td>Machine 03</td>
+                    <td>65%</td>
                     <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2">75%</span>
-                        <div>
-                          <Progress
-                            max="100"
-                            value="75"
-                            barClassName="bg-gradient-info"
-                          />
-                        </div>
-                      </div>
+                      <Progress value="65" barClassName="bg-gradient-info" />
                     </td>
                   </tr>
                 </tbody>
