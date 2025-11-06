@@ -2,8 +2,10 @@ import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
+import Reservations from "views/examples/Reservations.js";
 import Notifications from "views/examples/Notifications.js";
+import Machines from "views/examples/Machines";
+import Payments from "views/examples/Payments";
 
 var routes = [
   {
@@ -15,19 +17,35 @@ var routes = [
   },
 
   {
+    path: "/machines",
+    name: "Machines",
+    icon: "ni ni-settings text-blue",
+    component: <Machines />,
+    layout: "/admin",
+  },
+  {
+    path: "/reservations",
+    name: "Reservations",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: <Reservations />,
+    layout: "/admin",
+  },
+  {
+    path: "/payments",
+    name: "Payments",
+    icon: "ni ni-credit-card text-green",
+    component: <Payments />,
+    layout: "/admin",
+  },
+
+  {
     path: "/notifications",
     name: "Notifications",
     icon: "ni ni-bell-55 text-info",
     component: <Notifications />,
     layout: "/admin",
   },
-  {
-    path: "/tables",
-    name: "Tables",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: <Tables />,
-    layout: "/admin",
-  },
+
   {
     path: "/user-profile",
     name: "User Profile",

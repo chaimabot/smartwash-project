@@ -1,3 +1,9 @@
+/*!
+=========================================================
+* SmartWash Admin - Profile Page
+=========================================================
+*/
+
 import {
   Button,
   Card,
@@ -10,14 +16,15 @@ import {
   Row,
   Col,
 } from "reactstrap";
-// core components
-import UserHeader from "components/Headers/UserHeader.js";
+
+// ✅ SmartWash admin header
 import Header from "components/Headers/Header";
 
 const Profile = () => {
   return (
     <>
       <Header />
+
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
@@ -26,105 +33,104 @@ const Profile = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
+                    <h3 className="mb-0">Account (Manager Profile)</h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button
                       color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
                       size="sm"
+                      onClick={(e) => e.preventDefault()}
                     >
-                      Settings
+                      Edit Profile
                     </Button>
                   </Col>
                 </Row>
               </CardHeader>
+
               <CardBody>
                 <Form>
                   <h6 className="heading-small text-muted mb-4">
-                    User information
+                    Manager Information
                   </h6>
+
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-username"
+                            htmlFor="input-full-name"
                           >
-                            Username
+                            Full Name
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
-                            id="input-username"
-                            placeholder="Username"
+                            id="input-full-name"
+                            placeholder="Ex: Ahmed Ben Ali"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
+
                       <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
                             htmlFor="input-email"
                           >
-                            Email address
+                            Email
                           </label>
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            placeholder="jesse@example.com"
+                            placeholder="admin@smartwash.tn"
                             type="email"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
+
                     <Row>
                       <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-first-name"
+                            htmlFor="input-phone"
                           >
-                            First name
+                            Phone Number
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
+                            id="input-phone"
+                            placeholder="+216 50 000 000"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
+
                       <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-last-name"
+                            htmlFor="input-role"
                           >
-                            Last name
+                            Role
                           </label>
                           <Input
+                            disabled
                             className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
+                            id="input-role"
+                            value="Administrator / SmartWash Manager"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                   </div>
-                  <Button
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Edit profile
-                  </Button>{" "}
+
+                  <Button color="success" size="md">
+                    Save changes
+                  </Button>
                 </Form>
               </CardBody>
             </Card>
