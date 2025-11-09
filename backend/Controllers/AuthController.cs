@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization; // Pour [Authorize]
+﻿using backend.Data;
+using backend.DTOs;
+using backend.Models;
+using backend.Services; // Pour EmailService
+using BCrypt.Net;
+using Microsoft.AspNetCore.Authorization; // Pour [Authorize]
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // Pour les méthodes async EF
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BCrypt.Net;
-using backend.Data;
-using backend.DTOs;
-using backend.Models;
-using backend.Services; // Pour EmailService
 
 namespace backend.Controllers
 {
@@ -216,6 +216,22 @@ namespace backend.Controllers
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        // POST: api/Auth/logout
+        [HttpPost("logout")]
+        [Authorize] // Oblige d'être connecté
+        public async Task<IActionResult> Logout()
+        {
+            var userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
+                return Unauthorized(new { Message = "Token invalide" });
+
+            // Blacklist le token actuel
+            var token = Request.Headers["Authorizationions["Authorization"].ToString().Replace("Bearer ", "");
+        
+            await _blacklistService.AddToBlacklistAsync(token);
+
+            return Ok(new { Message = "Déconnexion réussie. Token invalidé." });
         }
     }
 }
