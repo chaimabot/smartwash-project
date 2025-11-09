@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  min-height: max(884px, 100dvh);
+}
+
+/* Home Screen Styles */
+.container {
+  flex: 1;
+  background-color: #121826;
+}
+
+.header {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  padding-top: 50px;
+  background-color: #111827;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.headerTitle {
+  flex: 1;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 12px;
+}
+
+.notificationBtn {
+  padding: 8px;
+}
+
+.scrollView {
+  flex: 1;
+}
+
+.gridContainer {
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 16px;
+  gap: 16px;
+}
+
+.gridItem {
+  width: 47%;
+  background-color: #1F2937;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  
+  
+  
+}
+
+.gridTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 12px;
+}
+
+.gridSubtitle {
+  font-size: 14px;
+  color: #9da6b9;
+  margin-top: 4px;
+}
+
+.currentWashCard {
+  background-color: #1F2937;
+  border-radius: 16px;
+  margin-horizontal: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  
+  
+  
+}
+
+.washImage {
+  width: 100%;
+  height: 200px;
+}
+
+.washInfo {
+  padding: 16px;
+}
+
+.washTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.washDetail {
+  font-size: 16px;
+  color: #9da6b9;
+  margin-bottom: 4px;
+}
+
+.detailsBtn {
+  background-color: #2463eb;
+  border-radius: 24px;
+  padding-vertical: 10px;
+  padding-horizontal: 16px;
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
+.detailsBtnText {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  padding-horizontal: 16px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.machinesScroll {
+  padding-left: 16px;
+  margin-bottom: 24px;
+}
+
+.machineCard {
+  width: 160px;
+  background-color: #1F2937;
+  border-radius: 16px;
+  margin-right: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  
+  
+  
+}
+
+.machineImage {
+  width: 100%;
+  height: 160px;
+}
+
+.machineInfo {
+  padding: 12px;
+}
+
+.machineName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.machineStatus {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.reserveBtn {
+  background-color: rgba(36, 99, 235, 0.2);
+  border-radius: 24px;
+  padding-vertical: 8px;
+  align-items: center;
+}
+
+.reserveBtnDisabled {
+  background-color: #374151;
+}
+
+.reserveBtnText {
+  color: #2463eb;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.reserveBtnTextDisabled {
+  color: #6b7280;
+}
+
+.historyContainer {
+  padding-horizontal: 16px;
+  gap: 12px;
+}
+
+.historyItem {
+  flex-direction: row;
+  align-items: center;
+  background-color: #1F2937;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  
+  
+  
+}
+
+.historyIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: rgba(36, 99, 235, 0.2);
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.historyInfo {
+  flex: 1;
+}
+
+.historyTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.historyDate {
+  font-size: 14px;
+  color: #9da6b9;
+}
+
+.historyPrice {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}

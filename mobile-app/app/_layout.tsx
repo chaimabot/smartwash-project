@@ -11,7 +11,7 @@ import "../styles/globals.css";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export const unstable_settings = {
-  initialRouteName: "(splash)",
+  initialRouteName: "(splash)/onboarding1",
 };
 
 export default function RootLayout() {

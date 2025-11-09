@@ -1,174 +1,323 @@
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View, Alert } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 
-/**
- * 👤 Page Profil - Laverie Intelligente
- * Avatar utilisateur + nom
- * Boutons: Modifier le profil, Paramètres, Se déconnecter
- * Design clair et doux
- */
-const ProfileScreen: React.FC = () => {
+export default function ProfileScreen() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
-  const router = useRouter();
 
-  const handleEditProfile = () => {
-    console.log("Edit profile");
-  };
+  const styles = createStyles(isDark);
 
-  const handleSettings = () => {
-    console.log("Open settings");
-  };
-
-  const handleNotifications = () => {
-    console.log("Notifications");
-  };
-
-  const handleHelp = () => {
-    console.log("Help");
-  };
-
-  const handleLogout = () => {
-    Alert.alert(
-      "Déconnexion",
-      "Êtes-vous sûr de vouloir vous déconnecter ?",
-      [
-        { text: "Annuler", style: "cancel" },
-        {
-          text: "Se déconnecter",
-          style: "destructive",
-          onPress: () => router.replace("/(auth)/login"),
-        },
-      ]
-    );
-  };
+  const MenuItem = ({
+    icon,
+    label,
+    onPress,
+  }: {
+    icon: keyof typeof Ionicons.glyphMap;
+    label: string;
+    onPress: () => void;
+  }) => (
+    <TouchableOpacity style={styles.menuItem} onPress={onPress}>
+      <View style={styles.menuItemLeft}>
+        <View style={styles.iconContainer}>
+          <Ionicons name={icon} size={24} color="#fff" />
+        </View>
+        <Text style={styles.menuItemText}>{label}</Text>
+      </View>
+      <Ionicons
+        name="chevron-forward"
+        size={24}
+        color={isDark ? "#64748b" : "#94a3b8"}
+      />
+    </TouchableOpacity>
+  );
 
   return (
-    <View className={`flex-1 ${isDark ? "bg-background-dark" : "bg-background-light"}`}>
-      {/* En-tête avec dégradé */}
-      <View className="pt-12 pb-8 px-6 items-center" style={{ backgroundColor: isDark ? "#1f2937" : "#ffffff" }}>
-        <View className="w-28 h-28 rounded-full items-center justify-center mb-4" style={{ backgroundColor: "#3c3cf6" }}>
-          <MaterialIcons name="person" size={56} color="#ffffff" />
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color={isDark ? "#fff" : "#1e293b"}
+            />
+          </TouchableOpacity>
+          <Text style={styles.title}>Profil</Text>
         </View>
-        <Text className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-          Chaima
-        </Text>
-        <Text className="text-base text-gray-600 dark:text-gray-400">
-          chaima@example.com
-        </Text>
-      </View>
 
-      <ScrollView className="flex-1 px-6">
-        {/* Statistiques */}
-        <View className="mb-6 mt-4">
-          <Text className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Statistiques
-          </Text>
-          <View className="flex-row gap-3">
-            <View className={`flex-1 p-5 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} shadow-lg items-center`}>
-              <View className="w-12 h-12 rounded-full bg-primary/20 items-center justify-center mb-2">
-                <MaterialIcons name="local-laundry-service" size={24} color="#3c3cf6" />
-              </View>
-              <Text className="text-3xl font-bold text-primary mb-1">12</Text>
-              <Text className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                Lavages
-              </Text>
+        {/* Profile Header */}
+        <View style={styles.profileHeader}>
+          <Image
+            source={{
+              uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuBCYHHa2flskESZ941XBXKplsb_tsGXGQFTjoTVSNNYznGzrQiDxR3NKM6Ym44GgDaxLBvEbfTTlWKXB_-4lkxxnvXPQpbhxWO349tFBWYJ69ZKAJZQtahLe2OpYaF7XBYnWqk2u7oHBxIv-qgdUWbcOaaLwpBr7lHOZy0dtfIFknpQWR6atK0gTNzAQX_-9fYH6_c3jA-bURFAuNhsBNtqXDEEJZpLsWKcWWztRfjfM45SnYG7nd5I5Miv4PP7VaUBhaT2K0YZaqQb",
+            }}
+            style={styles.profileImage}
+          />
+          <Text style={styles.profileName}>Jean Dupont</Text>
+          <Text style={styles.profileEmail}>jean.dupont@email.com</Text>
+        </View>
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statCard}>
+            <Text style={styles.statValue}>42</Text>
+            <Text style={styles.statLabel}>Lavages effectués</Text>
+          </View>
+          <View style={styles.statCard}>
+            <Text style={styles.statValue}>126,50€</Text>
+            <Text style={styles.statLabel}>Dépenses totales</Text>
+          </View>
+        </View>
+
+        {/* Menu Sections */}
+        <View style={styles.content}>
+          {/* Compte */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Compte</Text>
+            <View style={styles.menuGroup}>
+              <MenuItem
+                icon="person-outline"
+                label="Mes informations"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination user info
+              />
+              <MenuItem
+                icon="card-outline"
+                label="Moyens de paiement"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination payment methods
+              />
+              <MenuItem
+                icon="star-outline"
+                label="Abonnement / Crédits"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination subscription
+              />
             </View>
-            <View className={`flex-1 p-5 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} shadow-lg items-center`}>
-              <View className="w-12 h-12 rounded-full bg-accent/20 items-center justify-center mb-2">
-                <MaterialIcons name="euro" size={24} color="#50E3C2" />
-              </View>
-              <Text className="text-3xl font-bold text-accent mb-1">60€</Text>
-              <Text className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                Dépensé
-              </Text>
+          </View>
+
+          {/* Activité */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Activité</Text>
+            <View style={styles.menuGroup}>
+              <MenuItem
+                icon="time-outline"
+                label="Historique des lavages"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination history
+              />
+              <MenuItem
+                icon="notifications-outline"
+                label="Notifications"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination notifications
+              />
+            </View>
+          </View>
+
+          {/* Support */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Support</Text>
+            <View style={styles.menuGroup}>
+              <MenuItem
+                icon="help-circle-outline"
+                label="Aide & FAQ"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination help
+              />
+              <MenuItem
+                icon="headset-outline"
+                label="Contacter le support"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination support
+              />
+            </View>
+          </View>
+
+          {/* Paramètres */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Paramètres</Text>
+            <View style={styles.menuGroup}>
+              <MenuItem
+                icon="language-outline"
+                label="Langue"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination language
+              />
+              <MenuItem
+                icon="moon-outline"
+                label="Thème de l'application"
+                onPress={() => router.push("/profile")} //TODO: Changer la destination theme
+              />
             </View>
           </View>
         </View>
 
-        {/* Options du profil */}
-        <View className="mb-6">
-          <Text className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-            Paramètres du compte
-          </Text>
-          <View className="space-y-3">
-            <TouchableOpacity
-              onPress={handleEditProfile}
-              className={`p-4 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} flex-row items-center shadow-lg`}
-            >
-              <View className="w-12 h-12 rounded-full bg-primary/10 items-center justify-center">
-                <MaterialIcons name="edit" size={24} color="#3c3cf6" />
-              </View>
-              <Text className="flex-1 ml-4 text-base font-semibold text-gray-900 dark:text-white">
-                Modifier le profil
-              </Text>
-              <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={handleSettings}
-              className={`p-4 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} flex-row items-center shadow-lg`}
-            >
-              <View className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 items-center justify-center">
-                <MaterialIcons name="settings" size={24} color="#6b7280" />
-              </View>
-              <Text className="flex-1 ml-4 text-base font-semibold text-gray-900 dark:text-white">
-                Paramètres
-              </Text>
-              <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={handleNotifications}
-              className={`p-4 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} flex-row items-center shadow-lg`}
-            >
-              <View className="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30 items-center justify-center">
-                <MaterialIcons name="notifications" size={24} color="#f59e0b" />
-              </View>
-              <Text className="flex-1 ml-4 text-base font-semibold text-gray-900 dark:text-white">
-                Notifications
-              </Text>
-              <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={handleHelp}
-              className={`p-4 rounded-2xl ${isDark ? "bg-gray-800" : "bg-white"} flex-row items-center shadow-lg`}
-            >
-              <View className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 items-center justify-center">
-                <MaterialIcons name="help" size={24} color="#3b82f6" />
-              </View>
-              <Text className="flex-1 ml-4 text-base font-semibold text-gray-900 dark:text-white">
-                Aide & Support
-              </Text>
-              <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Bouton Déconnexion */}
-        <TouchableOpacity
-          onPress={handleLogout}
-          className="mb-8 h-16 rounded-2xl items-center justify-center flex-row bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800"
-        >
-          <MaterialIcons name="logout" size={24} color="#ef4444" />
-          <Text className="text-red-600 dark:text-red-400 text-base font-bold ml-2">
-            Se déconnecter
-          </Text>
-        </TouchableOpacity>
-
-        {/* Version */}
-        <View className="mb-8 items-center">
-          <Text className="text-sm text-gray-500 dark:text-gray-500">
-            Version 1.0.0
-          </Text>
+        {/* Logout Button */}
+        <View style={styles.logoutContainer}>
+          <TouchableOpacity
+            style={styles.logoutButton}
+            onPress={() => {
+              // Handle logout
+              console.log("Logout pressed");
+            }}
+          >
+            <Ionicons
+              name="log-out-outline"
+              size={24}
+              color={isDark ? "#f87171" : "#dc2626"}
+            />
+            <Text style={styles.logoutText}>Se déconnecter</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
   );
-};
+}
 
-export default ProfileScreen;
+const createStyles = (isDark: boolean) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: isDark ? "#111621" : "#f6f6f8",
+    },
+    scrollView: {
+      flex: 1,
+    },
+    header: {
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 8,
+      backgroundColor: isDark ? "#111621" : "#f6f6f8",
+    },
+    backButton: {
+      width: 48,
+      height: 48,
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    title: {
+      fontSize: 28,
+      fontWeight: "700",
+      color: isDark ? "#fff" : "#0f172a",
+      letterSpacing: -0.5,
+    },
+    profileHeader: {
+      alignItems: "center",
+      paddingVertical: 24,
+      paddingHorizontal: 16,
+    },
+    profileImage: {
+      width: 128,
+      height: 128,
+      borderRadius: 64,
+      marginBottom: 16,
+    },
+    profileName: {
+      fontSize: 22,
+      fontWeight: "700",
+      color: isDark ? "#fff" : "#0f172a",
+      marginBottom: 4,
+    },
+    profileEmail: {
+      fontSize: 16,
+      color: isDark ? "#94a3b8" : "#64748b",
+    },
+    statsContainer: {
+      flexDirection: "row",
+      gap: 12,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
+    statCard: {
+      flex: 1,
+      backgroundColor: isDark ? "rgba(15, 23, 42, 0.5)" : "#fff",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: isDark ? "#1e293b" : "#e2e8f0",
+      padding: 16,
+      alignItems: "center",
+    },
+    statValue: {
+      fontSize: 24,
+      fontWeight: "700",
+      color: isDark ? "#fff" : "#0f172a",
+      marginBottom: 8,
+    },
+    statLabel: {
+      fontSize: 14,
+      color: isDark ? "#94a3b8" : "#64748b",
+      textAlign: "center",
+    },
+    content: {
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    },
+    section: {
+      marginBottom: 16,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: isDark ? "#fff" : "#0f172a",
+      marginBottom: 8,
+      marginTop: 16,
+    },
+    menuGroup: {
+      gap: 8,
+    },
+    menuItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: isDark ? "rgba(15, 23, 42, 0.5)" : "#fff",
+      borderRadius: 16,
+      padding: 12,
+      minHeight: 56,
+    },
+    menuItemLeft: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 16,
+      flex: 1,
+    },
+    iconContainer: {
+      width: 40,
+      height: 40,
+      borderRadius: 16,
+      backgroundColor: "#2463eb",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    menuItemText: {
+      fontSize: 16,
+      color: isDark ? "#fff" : "#1e293b",
+      flex: 1,
+    },
+    logoutContainer: {
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      paddingBottom: 32,
+    },
+    logoutButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      backgroundColor: isDark ? "rgba(220, 38, 38, 0.3)" : "#fee2e2",
+      borderRadius: 16,
+      padding: 16,
+    },
+    logoutText: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: isDark ? "#f87171" : "#dc2626",
+    },
+  });

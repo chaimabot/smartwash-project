@@ -18,7 +18,8 @@ interface ChipFilter {
 }
 
 // Main App Component
-const LaundryApp: React.FC = () => {
+export default function HomeScreen() {
+  // Removed unused variable
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
@@ -80,7 +81,7 @@ const LaundryApp: React.FC = () => {
   return (
     <div className={`font-display ${theme === "dark" ? "dark" : ""}`}>
       {/* Tailwind config would normally be in a separate file */}
-      <style jsx global>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
         @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
@@ -235,4 +236,4 @@ const LaundryApp: React.FC = () => {
       </div>
     </div>
   );
-};
+}

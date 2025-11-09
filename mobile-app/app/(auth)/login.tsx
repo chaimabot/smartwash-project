@@ -1,191 +1,408 @@
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { router } from "expo-router";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-/**
- * 🔐 Page Login - Laverie Intelligente
- * Design moderne avec bulles floutées bleu/turquoise
- * Champs email et mot de passe avec icônes
- * Boutons Google et Apple
- */
-const LoginScreen: React.FC = () => {
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const router = useRouter();
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  // Charger les données sauvegardées au démarrage
+  useEffect(() => {
+    loadSavedCredentials();
+  }, []);
+
+  const loadSavedCredentials = async () => {
+    try {
+      const saved = await AsyncStorage.getItem("rememberedUser");
+      if (saved) {
+        const { email: savedEmail, remember } = JSON.parse(saved);
+        setEmail(savedEmail);
+        setRememberMe(remember);
+      }
+    } catch (error) {
+      console.log("Erreur chargement credentials", error);
+    }
   };
 
-  const handleLogin = () => {
-    console.log("Login attempt:", { email, password });
-    router.replace("/(tabs)");
+  const saveCredentials = async () => {
+    if (rememberMe) {
+      await AsyncStorage.setItem(
+        "rememberedUser",
+        JSON.stringify({ email, remember: true })
+      );
+    } else {
+      await AsyncStorage.removeItem("rememberedUser");
+    }
   };
 
-  const handleCreateAccount = () => {
-    router.push("/(auth)/register");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Erreur", "Veuillez remplir tous les champs");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://localhost:7017/api/Auth/login",
+        {
+          email,
+          password,
+        }
+      );
+
+      const { token } = response.data;
+
+      // Sauvegarde du token
+      await AsyncStorage.setItem("userToken", token);
+
+      // Sauvegarde email si "Se souvenir de moi"
+      await saveCredentials();
+
+      Alert.alert("Succès", "Bienvenue sur Laverie Futée !", [
+        { text: "OK", onPress: () => router.replace("/(tabs)") },
+      ]);
+    } catch (error: any) {
+      const msg =
+        error.response?.data?.message || "Email ou mot de passe incorrect";
+      Alert.alert("Connexion échouée", msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = () => {
-    console.log("Navigate to forgot password");
+    router.push("/(auth)/forgot-password");
+  };
+
+  const handleSignUp = () => {
+    router.push("/(auth)/register");
   };
 
   const handleGoogleLogin = () => {
-    console.log("Google login");
+    Alert.alert("Bientôt disponible", "Connexion Google en développement");
   };
 
-  const handleAppleLogin = () => {
-    console.log("Apple login");
+  const handleFacebookLogin = () => {
+    Alert.alert("Bientôt disponible", "Connexion Facebook en développement");
   };
 
   return (
-    <ScrollView className={`flex-1 ${isDark ? "bg-background-dark" : "bg-background-light"}`}>
-      <View className="relative min-h-screen w-full items-center justify-center px-6 py-12">
-        {/* Bulles décoratives floutées */}
-        <View className="absolute top-[-10%] left-[-15%] w-72 h-72 rounded-full bg-primary/20 blur-3xl" />
-        <View className="absolute top-[20%] right-[-10%] w-64 h-64 rounded-full bg-accent/15 blur-3xl" />
-        <View className="absolute bottom-[-5%] left-[10%] w-56 h-56 rounded-full bg-primary/10 blur-3xl" />
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#111621" />
 
-        <View className="relative z-10 w-full max-w-md">
-          {/* Logo */}
-          <View className="mb-8 items-center">
-            <View className="mb-6 w-24 h-24 items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-lg">
-              <MaterialIcons name="local-laundry-service" size={56} color="#3c3cf6" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardView}
+      >
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Logo et Nom de l'App */}
+          <View style={styles.logoContainer}>
+            <View style={styles.logoCircle}>
+              <MaterialCommunityIcons
+                name="washing-machine"
+                size={64}
+                color="#4A90E2"
+              />
             </View>
-
-            {/* Titre */}
-            <Text className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-2">
-              Bienvenue dans Laverie Intelligente
-            </Text>
-            <Text className="text-base text-gray-600 dark:text-gray-400 text-center">
-              Connectez-vous pour gérer vos lavages intelligents
-            </Text>
+            <Text style={styles.appName}>Laverie Futée</Text>
           </View>
 
-          {/* Formulaire */}
-          <View className="space-y-5">
-            {/* Champ Email */}
-            <View>
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email
-              </Text>
-              <View className={`flex-row items-center rounded-xl ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} border px-4 h-14`}>
-                <MaterialIcons name="mail" size={22} color={isDark ? "#9ca3af" : "#6b7280"} />
-                <TextInput
-                  className={`flex-1 ml-3 text-base ${isDark ? "text-white" : "text-gray-900"}`}
-                  placeholder="votre@email.com"
-                  placeholderTextColor={isDark ? "#6b7280" : "#9ca3af"}
-                  value={email}
-                  onChangeText={setEmail}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
+          {/* Carte de connexion */}
+          <View style={styles.loginCard}>
+            <Text style={styles.title}>Connexion</Text>
 
-            {/* Champ Mot de passe */}
-            <View>
-              <Text className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Mot de passe
-              </Text>
-              <View className={`flex-row items-center rounded-xl ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} border px-4 h-14`}>
-                <MaterialIcons name="lock" size={22} color={isDark ? "#9ca3af" : "#6b7280"} />
-                <TextInput
-                  className={`flex-1 ml-3 text-base ${isDark ? "text-white" : "text-gray-900"}`}
-                  placeholder="••••••••"
-                  placeholderTextColor={isDark ? "#6b7280" : "#9ca3af"}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                />
-                <TouchableOpacity onPress={togglePasswordVisibility}>
-                  <MaterialIcons
-                    name={showPassword ? "visibility-off" : "visibility"}
-                    size={22}
-                    color={isDark ? "#9ca3af" : "#6b7280"}
+            <View style={styles.formContainer}>
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Email</Text>
+                <View style={styles.inputWrapper}>
+                  <MaterialCommunityIcons
+                    name="email-outline"
+                    size={20}
+                    color="#6b7280"
+                    style={styles.inputIcon}
                   />
-                </TouchableOpacity>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Entrez votre adresse email"
+                    placeholderTextColor="#6b7280"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    value={email}
+                    onChangeText={setEmail}
+                    editable={!loading}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Mot de passe</Text>
+                <View style={styles.inputWrapper}>
+                  <MaterialCommunityIcons
+                    name="lock-outline"
+                    size={20}
+                    color="#6b7280"
+                    style={styles.inputIcon}
+                  />
+                  <TextInput
+                    style={[styles.input, styles.passwordInput]}
+                    placeholder="Entrez votre mot de passe"
+                    placeholderTextColor="#6b7280"
+                    secureTextEntry={!showPassword}
+                    value={password}
+                    onChangeText={setPassword}
+                    editable={!loading}
+                  />
+                  <TouchableOpacity
+                    style={styles.eyeButton}
+                    onPress={() => setShowPassword(!showPassword)}
+                    activeOpacity={0.7}
+                  >
+                    <MaterialCommunityIcons
+                      name={showPassword ? "eye-off-outline" : "eye-outline"}
+                      size={20}
+                      color="#6b7280"
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
 
-            {/* Mot de passe oublié */}
-            <TouchableOpacity onPress={handleForgotPassword} className="self-end">
-              <Text className="text-sm font-medium text-primary">
-                Mot de passe oublié ?
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Boutons d'action */}
-          <View className="mt-8 space-y-3">
-            {/* Bouton Se connecter */}
-            <TouchableOpacity
-              onPress={handleLogin}
-              className="h-14 bg-gradient-to-r from-primary to-primary-light rounded-xl items-center justify-center shadow-lg"
-              style={{
-                backgroundColor: "#3c3cf6",
-              }}
-            >
-              <Text className="text-white text-base font-semibold">
-                Se connecter
-              </Text>
-            </TouchableOpacity>
-
-            {/* Bouton Créer un compte */}
-            <TouchableOpacity
-              onPress={handleCreateAccount}
-              className={`h-14 rounded-xl items-center justify-center border-2 ${isDark ? "border-primary/70 bg-transparent" : "border-primary/50 bg-transparent"}`}
-            >
-              <Text className="text-primary text-base font-semibold">
-                Créer un compte
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Séparateur */}
-          <View className="flex-row items-center my-8">
-            <View className={`flex-1 h-px ${isDark ? "bg-gray-700" : "bg-gray-300"}`} />
-            <Text className={`mx-4 text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>
-              OU
-            </Text>
-            <View className={`flex-1 h-px ${isDark ? "bg-gray-700" : "bg-gray-300"}`} />
-          </View>
-
-          {/* Boutons sociaux */}
-          <View className="space-y-3">
-            {/* Google */}
-            <TouchableOpacity
-              onPress={handleGoogleLogin}
-              className={`h-14 rounded-xl flex-row items-center justify-center border ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-300"}`}
-            >
-              <View className="w-6 h-6 rounded-full bg-white items-center justify-center mr-3">
-                <MaterialIcons name="g-translate" size={18} color="#4285F4" />
+            <View style={styles.optionsContainer}>
+              <View style={styles.rememberMeContainer}>
+                <Switch
+                  value={rememberMe}
+                  onValueChange={setRememberMe}
+                  trackColor={{ false: "#767577", true: "#4A90E2" }}
+                  thumbColor={rememberMe ? "#ffffff" : "#f4f3f4"}
+                  style={styles.checkbox}
+                  disabled={loading}
+                />
+                <Text style={styles.rememberMeText}>Se souvenir de moi</Text>
               </View>
-              <Text className={`text-base font-medium ${isDark ? "text-white" : "text-gray-900"}`}>
-                Continuer avec Google
+              <TouchableOpacity
+                onPress={handleForgotPassword}
+                activeOpacity={0.7}
+                disabled={loading}
+              >
+                <Text style={styles.forgotPasswordText}>
+                  Mot de passe oublié ?
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={[
+                styles.loginButton,
+                loading && styles.loginButtonDisabled,
+              ]}
+              onPress={handleLogin}
+              activeOpacity={0.9}
+              disabled={loading}
+            >
+              <Text style={styles.loginButtonText}>
+                {loading ? "Connexion..." : "Se connecter"}
               </Text>
             </TouchableOpacity>
 
-            {/* Apple */}
-            <TouchableOpacity
-              onPress={handleAppleLogin}
-              className={`h-14 rounded-xl flex-row items-center justify-center border ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-300"}`}
-            >
-              <MaterialIcons name="apple" size={24} color={isDark ? "#ffffff" : "#000000"} className="mr-3" />
-              <Text className={`text-base font-medium ml-3 ${isDark ? "text-white" : "text-gray-900"}`}>
-                Continuer avec Apple
-              </Text>
+            <View style={styles.separator}>
+              <View style={styles.separatorLine} />
+              <Text style={styles.separatorText}>ou</Text>
+              <View style={styles.separatorLine} />
+            </View>
+
+            <View style={styles.socialButtonsContainer}>
+              <TouchableOpacity
+                style={styles.socialButton}
+                onPress={handleGoogleLogin}
+                activeOpacity={0.8}
+              >
+                <Image
+                  source={{
+                    uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuAZRrRrLLQrIalfINxd_NXWcZvPxkIgzn3CdgPmBzR9uu6g5GEh6Y6kUb-8XVoG4K2nUdv2INXDqo8nfl0l5pmXmhz8ypAT8sOZQlUjy5wf2Cxr3R7W-ZYTlFQLFPP_xaTHcx16q7lgqVgW2MU9jjmN85gv72HnVN6SXmBK6QT8SIkpH8qGhp2bza-tX-1KFETRqvojeFRngCL012fW1ImcYUUrq5yGOYxAs3-Hv4uYNpLYnb774ArvxINabWz30ubkiKsu0e5-vqJ6",
+                  }}
+                  style={styles.socialIcon}
+                />
+                <Text style={styles.socialButtonText}>
+                  Continuer avec Google
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.socialButton}
+                onPress={handleFacebookLogin}
+                activeOpacity={0.8}
+              >
+                <Image
+                  source={{
+                    uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuC_6ZYWINMuK1OfdGA_t7XIYLNkC1DAA1ekJWF637fyKP5IjH4gUDTo7kWih1XYRrQbf3IYaljwOFOonVXl8srYk1yAdBlp-ND3fYY83FzV9ILkbAghZijGzV77hP3DRWFWxZdZXSim6dH6JDPOldxobh0-J4cAtujNGEsnpbLIDxWoSNwLsUxz8N2kyC7N23edAtvdcbIhZbG5cOfQuH78EGhtpJO60lByHWIa5w-ToAPVWlVwpGMwZQt1z8i3OkAyNnoq_ptTcTNM",
+                  }}
+                  style={styles.socialIcon}
+                />
+                <Text style={styles.socialButtonText}>
+                  Continuer avec Facebook
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.signUpContainer}>
+            <Text style={styles.signUpText}>Nouvel utilisateur ? </Text>
+            <TouchableOpacity onPress={handleSignUp} activeOpacity={0.7}>
+              <Text style={styles.signUpLink}>Créez un compte</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </View>
-    </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
-};
+}
 
-export default LoginScreen;
+// Ajout d'un style pour le bouton désactivé
+const styles = StyleSheet.create({
+  // ... tous tes styles existants ...
+  loginButtonDisabled: {
+    opacity: 0.7,
+  },
+  // Garde tous les styles que tu avais déjà (je les ai omis pour la lisibilité)
+  container: { flex: 1, backgroundColor: "#111621" },
+  keyboardView: { flex: 1 },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 32,
+  },
+  logoContainer: { alignItems: "center", marginBottom: 32, gap: 16 },
+  logoCircle: {
+    width: 128,
+    height: 128,
+    borderRadius: 64,
+    backgroundColor: "rgba(74, 144, 226, 0.2)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  appName: { fontSize: 24, fontWeight: "700", color: "#ffffff" },
+  loginCard: {
+    width: "100%",
+    maxWidth: 448,
+    alignSelf: "center",
+    backgroundColor: "#1C212E",
+    borderRadius: 12,
+    padding: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#ffffff",
+    textAlign: "center",
+    marginBottom: 24,
+    letterSpacing: -0.5,
+  },
+  formContainer: { gap: 16, marginBottom: 16 },
+  inputGroup: { gap: 8 },
+  label: { fontSize: 16, fontWeight: "500", color: "#d1d5db" },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: 48,
+    borderWidth: 1,
+    borderColor: "#4b5563",
+    borderRadius: 8,
+    backgroundColor: "#374151",
+  },
+  inputIcon: { position: "absolute", left: 12, zIndex: 1 },
+  input: {
+    flex: 1,
+    height: "100%",
+    paddingLeft: 40,
+    paddingRight: 12,
+    fontSize: 16,
+    color: "#ffffff",
+  },
+  passwordInput: { paddingRight: 40 },
+  eyeButton: { position: "absolute", right: 12, padding: 4 },
+  optionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  rememberMeContainer: { flexDirection: "row", alignItems: "center", gap: 8 },
+  checkbox: { transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }] },
+  rememberMeText: { fontSize: 14, fontWeight: "500", color: "#d1d5db" },
+  forgotPasswordText: { fontSize: 14, fontWeight: "500", color: "#4A90E2" },
+  loginButton: {
+    height: 48,
+    backgroundColor: "#4A90E2",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 24,
+    shadowColor: "#4A90E2",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  loginButtonText: { fontSize: 16, fontWeight: "700", color: "#ffffff" },
+  separator: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 24,
+    gap: 16,
+  },
+  separatorLine: { flex: 1, height: 1, backgroundColor: "#4b5563" },
+  separatorText: { fontSize: 14, fontWeight: "500", color: "#6b7280" },
+  socialButtonsContainer: { gap: 12 },
+  socialButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 48,
+    backgroundColor: "#374151",
+    borderWidth: 1,
+    borderColor: "#4b5563",
+    borderRadius: 8,
+    gap: 12,
+  },
+  socialIcon: { width: 20, height: 20 },
+  socialButtonText: { fontSize: 16, fontWeight: "500", color: "#ffffff" },
+  signUpContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 32,
+  },
+  signUpText: { fontSize: 16, color: "#9ca3af" },
+  signUpLink: { fontSize: 16, fontWeight: "700", color: "#4A90E2" },
+});

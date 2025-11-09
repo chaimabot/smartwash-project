@@ -9,12 +9,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#3c3cf6",
+        primary: "#2463eb",
         "primary-light": "#5c5cf8",
-        "background-light": "#f5f6fa",
-        "background-dark": "#101022",
+        "background-light": "#f6f6f8",
+        "background-dark": "#111318",
+        "card-light": "#ffffff",
+        "card-dark": "#1c1f27",
+        "text-light": "#111318",
+        "text-light-secondary": "#6b7280",
+        "text-dark": "#ffffff",
+        "text-dark-secondary": "#9da6b9",
+        "border-light": "#e5e7eb",
+        "border-dark": "#3b4354",
         accent: "#50E3C2",
         "accent-light": "#70F3D2",
+        "neutral-gray": "#BDBDBD",
       },
       fontFamily: {
         display: ["Inter", "sans-serif"],
