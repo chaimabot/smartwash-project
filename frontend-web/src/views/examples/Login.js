@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2024 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // reactstrap components
 import {
   Button,
@@ -31,6 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -117,22 +100,14 @@ const Login = () => {
         </Card>
         <Row className="mt-3">
           <Col xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Forgot password?</small>
-            </a>
+            <Link className="text-light" to="/auth/ForgetPassword">
+              <small>Forget Password?</small>
+            </Link>
           </Col>
           <Col className="text-right" xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
+            <Link className="text-light" to="/auth/register">
               <small>Create new account</small>
-            </a>
+            </Link>
           </Col>
         </Row>
       </Col>
