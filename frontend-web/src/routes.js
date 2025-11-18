@@ -6,6 +6,7 @@ import Reservations from "views/examples/Reservations.js";
 import Notifications from "views/examples/Notifications.js";
 import Machines from "views/examples/Machines";
 import Payments from "views/examples/Payments";
+import ForgetPassword from "views/examples/ForgetPassword";
 
 var routes = [
   {
@@ -59,6 +60,7 @@ var routes = [
     icon: "ni ni-key-25 text-info",
     component: <Login />,
     layout: "/auth",
+    hidden: true,
   },
   {
     path: "/register",
@@ -66,6 +68,15 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: <Register />,
     layout: "/auth",
+    hidden: true,
+  },
+  {
+    path: "/ForgetPassword",
+    name: "ForgetPassword",
+    icon: "ni ni-circle-08 text-pink",
+    component: <ForgetPassword />,
+    layout: "/auth",
+    hidden: true,
   },
 ];
 export default routes;
