@@ -1,49 +1,33 @@
 #include <Arduino.h>
-#include "wifi_module.h"
+#include "control.h"
 #include "mqtt.h"
 #include "config.h"
-#include "sensors.h"
-
-Sensors sensors;
-WiFiModule wifi("IsraaPhone", "01020304");
 
 void setup() {
     Serial.begin(115200);
-    delay(500);
+    pinMode(LED_PIN, OUTPUT);
 
-    // === IMPORTANT POUR LED GPIO2 ===
-    pinMode(2, OUTPUT);  
-
-    sensors.begin();
-
-    // Connexion WiFi
-    bool wifi_ok = wifi.connect();
-
-    if (wifi_ok) {
-        mqtt_connect();        // Connexion broker
-        mqtt_publish_test();   // Test publish
-    } else {
-        Serial.println("[MAIN] WiFi non connecté → MQTT ignoré.");
+    // Connexion Wi-Fi
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    Serial.print("Connexion au Wi-Fi");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
     }
+    Serial.println();
+    Serial.println("Wi-Fi connecté !");
+    Serial.print("IP: ");
+    Serial.println(WiFi.localIP());
+
+    // Connexion au broker MQTT
+    mqtt_connect(MQTT_SERVER, MQTT_PORT);
 }
 
 void loop() {
-    // Auto reconnect WiFi
-    wifi.autoReconnect(5000);
-
-    static unsigned long lastSend = 0;
-
-    // Publier télémétrie toutes les 3 secondes
-    if (millis() - lastSend > 3000) {
-        lastSend = millis();
-
-        String data = sensors.getTelemetry();
-        mqtt_publish("machine/1/telemetry", data.c_str());
-
-        Serial.print("[SIMU] Data envoyée : ");
-        Serial.println(data);
-    }
-
-    // MQTT doit être traité en continu
+    // Boucle MQTT
     mqtt_loop();
+
+    // Publier le statut de la machine toutes les secondes
+    processTelemetry();
+    delay(1000);
 }

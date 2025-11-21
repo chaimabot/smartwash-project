@@ -1,9 +1,12 @@
-#ifndef MQTT_MODULE_H
-#define MQTT_MODULE_H
+#pragma once
+#include <WiFi.h>
+#include <PubSubClient.h>
 
-void mqtt_connect();
-void mqtt_publish_test();
-void mqtt_publish(const char* topic, const char* payload);  // ← Ajouté
+// Déclaration externe de client pour l'utiliser dans main.cpp
+extern PubSubClient client;
+
+// Prototypes des fonctions MQTT
+void mqtt_connect(const char* server, int port);
 void mqtt_loop();
-
-#endif
+void mqtt_publish(const char* topic, String payload);
+void mqtt_callback(char* topic, byte* payload, unsigned int length);

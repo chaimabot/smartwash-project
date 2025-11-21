@@ -1,102 +1,52 @@
-#include <Arduino.h>
-#include <WiFi.h>
-#include <PubSubClient.h>
+#include "mqtt.h"
+#include "control.h"
 #include "config.h"
 
+// Création réelle des objets WiFi et MQTT
 WiFiClient espClient;
-PubSubClient mqttClient(espClient);
+PubSubClient client(espClient);
 
-// ========== MOTEUR (simulé avec LED GPIO2) ==========
-#define MOTOR_PIN 2
-
-// ============================
 // Callback MQTT
-// ============================
 void mqtt_callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print("\n[MQTT] Message reçu sur ");
-    Serial.print(topic);
-    Serial.print(" : ");
+    String msg;
+    for (unsigned int i = 0; i < length; i++) msg += (char)payload[i];
 
-    // Convertir payload → String
-    String msg = "";
-    for (int i = 0; i < length; i++) {
-        msg += (char)payload[i];
-    }
+    Serial.print("Message reçu sur ");
+    Serial.print(topic);
+    Serial.print(": ");
     Serial.println(msg);
 
-    // =============================
-    // Gestion des commandes moteur
-    // =============================
-    if (String(topic) == "machine/1/cmd") {
-
-        if (msg.indexOf("start") != -1) {
-            digitalWrite(MOTOR_PIN, HIGH);   // Moteur ON (LED ON)
-            Serial.println("[ACTION] MOTEUR → DÉMARRÉ");
-        }
-        else if (msg.indexOf("stop") != -1) {
-            digitalWrite(MOTOR_PIN, LOW);    // Moteur OFF (LED OFF)
-            Serial.println("[ACTION] MOTEUR → ARRÊTÉ");
-        }
-        else {
-            Serial.println("[ACTION] Commande inconnue !");
-        }
-    }
+    if (msg == "start" && machineStatus == "available") startMachine();
+    else if (msg == "stop") stopMachine();
 }
 
-// ============================
 // Connexion au broker MQTT
-// ============================
-void mqtt_connect() {
-    pinMode(MOTOR_PIN, OUTPUT);
-    digitalWrite(MOTOR_PIN, LOW);  // moteur OFF par défaut
+void mqtt_connect(const char* server, int port) {
+    client.setServer(server, port);
+    client.setCallback(mqtt_callback);
 
-    mqttClient.setServer(MQTT_BROKER_IP, MQTT_PORT);
-    mqttClient.setCallback(mqtt_callback);
-
-    Serial.println("[MQTT] Connexion au broker...");
-
-    while (!mqttClient.connected()) {
-        if (mqttClient.connect(MQTT_CLIENT_ID)) {
-            Serial.println("[MQTT] Connecté au broker !");
-
-            mqttClient.subscribe("test/esp32");
-            mqttClient.subscribe("machine/1/cmd");   // Commandes moteur
-        } 
-        else {
-            Serial.print("[MQTT] Échec, code erreur = ");
-            Serial.println(mqttClient.state());
+    while (!client.connected()) {
+        Serial.println("Connexion au broker MQTT...");
+        if (client.connect("ESP32Client")) {
+            Serial.println("MQTT connecté !");
+            client.subscribe("machine/1/command"); // Souscrire aux commandes de la machine
+        } else {
+            Serial.print("Échec, rc=");
+            Serial.print(client.state());
             delay(2000);
         }
     }
 }
 
-// ============================
-// Publish test
-// ============================
-void mqtt_publish_test() {
-    const char* payload = "{\"msg\":\"hello from ESP32\"}";
-    mqttClient.publish(MQTT_TEST_TOPIC, payload);
-    Serial.println("[MQTT] Message publié !");
-}
-
-// ============================
-// Publish général
-// ============================
-void mqtt_publish(const char* topic, const char* payload) {
-    mqttClient.publish(topic, payload);
-
-    Serial.print("[MQTT] PUB → ");
-    Serial.print(topic);
-    Serial.print(" : ");
-    Serial.println(payload);
-}
-
-// ============================
-// Loop MQTT
-// ============================
+// Boucle MQTT
 void mqtt_loop() {
-    if (!mqttClient.connected()) {
-        mqtt_connect();
+    if (!client.connected()) {
+        mqtt_connect(MQTT_SERVER, MQTT_PORT);
     }
-    mqttClient.loop();
+    client.loop();
+}
+
+// Publier un message
+void mqtt_publish(const char* topic, String payload) {
+    client.publish(topic, payload.c_str());
 }

@@ -1,20 +1,14 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
+#include <Arduino.h>
 
-// ===============================
-// WIFI CONFIG — Ton hotspot iPhone
-// ===============================
-#define WIFI_SSID        "IsraaPhone"
-#define WIFI_PASSWORD    "01020304"   // Ton mot de passe
+// Wi-Fi
 
-// ===============================
-// MQTT CONFIG — Broker Mosquitto sur ton PC
-// ===============================
-#define MQTT_BROKER_IP   "172.20.10.3"   // IP de ton PC
-#define MQTT_PORT        1883
-#define MQTT_CLIENT_ID   "ESP32-Israa"
+#define WIFI_SSID "IsraaPhone"
+#define WIFI_PASSWORD "01020304"
 
-// Topic de test
-#define MQTT_TEST_TOPIC  "test/esp32"
+// MQTT
+#define MQTT_SERVER "172.20.10.3"
+#define MQTT_PORT 1883
 
-#endif
+// LED pour simuler la machine
+#define LED_PIN 2
